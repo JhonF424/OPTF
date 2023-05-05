@@ -1,0 +1,32 @@
+<span class="data-count">{{count}} Request</span>
+<select [(ngModel)]="selectedColumn" class="dropdown">
+  <option *ngFor="let column of columns" [value]="column.field" class="dropdown-menu">{{column.name}}</option>
+</select>
+<button (click)="addColumn()" class="add-button">Añadir Columna</button>
+
+<span> Añadir Filtro </span>
+<select [(ngModel)]="selectedFilter" (change)="applyFilter(selectedFilter)">
+  <option value="">All</option>
+  <option value="male">Gender Male</option>
+  <option value="female">Gender Female</option>
+  <option value="n/a">Gender Other</option>
+  <option value="unknown">Unknown Year Birth</option>
+</select>
+<!-- <button (click)="applyFilter()" class="filter-button">Filtrar</button> -->
+
+
+<table class="custom-table">
+  <thead>
+    <tr>
+      <th *ngFor="let column of displayedColumns">{{ column.name }}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let row of filteredTableData">
+      <td *ngFor="let column of displayedColumns">{{ row[column.field] }}</td>
+    </tr>
+  </tbody>
+</table>
+<button (click)="previousPage()" [disabled]="!previousUrl" class="arrow left"></button>
+<button (click)="nextPage()" [disabled]="!nextUrl" class="arrow right"></button>
+
